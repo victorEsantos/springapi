@@ -1,5 +1,6 @@
 package com.victor.springapi.services;
 
+import com.victor.springapi.domain.Cliente;
 import com.victor.springapi.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,5 +75,22 @@ public abstract class AbstractEmailService implements EmailService
 		mmh.setSentDate(new Date(System.currentTimeMillis()));
 		mmh.setText(htmlFromTemplatePedido(obj), true);
 		return mimeMessage;
+	}
+
+	@Override
+	public void sendNewPasswordEmail(Cliente cliente, String novaSenha) {
+		SimpleMailMessage sm = prepareNewPasswordEmail(cliente, novaSenha);
+		sendEmail(sm);
+	}
+
+	protected SimpleMailMessage prepareNewPasswordEmail(Cliente cliente, String novaSenha){
+		SimpleMailMessage sm = new SimpleMailMessage();
+		sm.setTo(cliente.getEmail());
+		sm.setFrom(sender);
+		sm.setSubject("Solicitação nova senha");
+		sm.setSentDate(new Date(System.currentTimeMillis()));
+		sm.setText("Nova senha: " + novaSenha);
+
+		return sm;
 	}
 }
