@@ -5,9 +5,12 @@ import com.victor.springapi.DTO.ClienteNewDTO;
 import com.victor.springapi.domain.Cidade;
 import com.victor.springapi.domain.Cliente;
 import com.victor.springapi.domain.Endereco;
+import com.victor.springapi.domain.enums.Perfil;
 import com.victor.springapi.domain.enums.TipoCliente;
 import com.victor.springapi.repository.ClienteRepository;
 import com.victor.springapi.repository.EnderecoRepository;
+import com.victor.springapi.security.UserSS;
+import com.victor.springapi.services.exceptions.AuthorizationException;
 import com.victor.springapi.services.exceptions.DataIntegrityException;
 import com.victor.springapi.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,13 @@ public class ClienteService
 
 	public Cliente find(Integer id)
 	{
+
+		UserSS user = UserService.authenticated();
+
+		if(user == null || !user.hasRole(Perfil.ADMIN) && !user.getId().equals(id)){
+			throw new AuthorizationException("Acesso negado");
+		}
+
 		Optional<Cliente> obj = clienteRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 			"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));

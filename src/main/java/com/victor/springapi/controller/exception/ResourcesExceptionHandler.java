@@ -1,5 +1,6 @@
 package com.victor.springapi.controller.exception;
 
+import com.victor.springapi.services.exceptions.AuthorizationException;
 import com.victor.springapi.services.exceptions.DataIntegrityException;
 import com.victor.springapi.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,15 @@ public class ResourcesExceptionHandler
 		}
 
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+	}
+
+	@ExceptionHandler(AuthorizationException.class)
+	public ResponseEntity<StandardError> objectNotFound(AuthorizationException e,
+														HttpServletRequest request)
+	{
+
+		StandardError err = new StandardError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(),
+				"Acesso__negado!", e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 	}
 }
