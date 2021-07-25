@@ -1,5 +1,6 @@
 package com.victor.springapi.services;
 
+import com.victor.springapi.domain.Cliente;
 import com.victor.springapi.domain.ItemPedido;
 import com.victor.springapi.domain.PagamentoComBoleto;
 import com.victor.springapi.domain.Pedido;
@@ -7,8 +8,13 @@ import com.victor.springapi.domain.enums.EstadoPagamento;
 import com.victor.springapi.repository.ItemPedidoRepository;
 import com.victor.springapi.repository.PagamentoRepository;
 import com.victor.springapi.repository.PedidoRepository;
+import com.victor.springapi.security.UserSS;
+import com.victor.springapi.services.exceptions.AuthorizationException;
 import com.victor.springapi.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -70,4 +76,15 @@ public class PedidoService
 		emailService.sendOrderConfirmationHtmlEmail(obj);
 		return obj;
 	}
+
+	public Page<Pedido> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+		UserSS user = UserService.authenticated();
+		if(user == null)
+			throw new AuthorizationException("Acesso negado");
+
+		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
+		Cliente cliente = clienteService.find(user.getId());
+		return pedidoRepository.findByCliente(cliente, pageRequest);
+	}
+
 }
