@@ -2,8 +2,8 @@ package com.victor.springapi.services;
 
 import com.victor.springapi.domain.Categoria;
 import com.victor.springapi.domain.Produto;
-import com.victor.springapi.repositoriesDAO.CategoriaRepository;
-import com.victor.springapi.repositoriesDAO.ProdutoRepository;
+import com.victor.springapi.repository.CategoriaRepository;
+import com.victor.springapi.repository.ProdutoRepository;
 import com.victor.springapi.services.exceptions.ObjectNotFoundException;
 import java.util.List;
 import java.util.Optional;

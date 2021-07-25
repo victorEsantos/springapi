@@ -1,7 +1,7 @@
 package com.victor.springapi.services;
 
 import com.victor.springapi.domain.Cliente;
-import com.victor.springapi.repositoriesDAO.ClienteRepository;
+import com.victor.springapi.repository.ClienteRepository;
 import com.victor.springapi.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

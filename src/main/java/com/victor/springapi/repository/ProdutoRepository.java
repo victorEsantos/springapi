@@ -1,4 +1,4 @@
-package com.victor.springapi.repositoriesDAO;
+package com.victor.springapi.repository;
 
 import com.victor.springapi.domain.Categoria;
 import com.victor.springapi.domain.Produto;

@@ -1,4 +1,4 @@
-package com.victor.springapi.repositoriesDAO;
+package com.victor.springapi.repository;
 
 import com.victor.springapi.domain.Cidade;
 import org.springframework.data.jpa.repository.JpaRepository;

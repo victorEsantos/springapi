@@ -3,7 +3,7 @@ package com.victor.springapi.services.validation;
 import com.victor.springapi.DTO.ClienteNewDTO;
 import com.victor.springapi.domain.Cliente;
 import com.victor.springapi.domain.enums.TipoCliente;
-import com.victor.springapi.repositoriesDAO.ClienteRepository;
+import com.victor.springapi.repository.ClienteRepository;
 import com.victor.springapi.controller.exception.FieldErrorMessage;
 import com.victor.springapi.services.validation.utils.BR;
 import java.util.ArrayList;

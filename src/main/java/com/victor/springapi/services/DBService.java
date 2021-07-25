@@ -4,7 +4,7 @@ import com.victor.springapi.domain.*;
 import com.victor.springapi.domain.enums.EstadoPagamento;
 import com.victor.springapi.domain.enums.Perfil;
 import com.victor.springapi.domain.enums.TipoCliente;
-import com.victor.springapi.repositoriesDAO.*;
+import com.victor.springapi.repository.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
