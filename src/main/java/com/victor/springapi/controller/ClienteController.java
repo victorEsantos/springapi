@@ -4,15 +4,16 @@ import com.victor.springapi.DTO.ClienteDTO;
 import com.victor.springapi.DTO.ClienteNewDTO;
 import com.victor.springapi.domain.Cliente;
 import com.victor.springapi.services.ClienteService;
-import java.net.URI;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import javax.validation.Valid;
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/clientes")

@@ -1,9 +1,10 @@
 package com.victor.springapi.services;
 
 import com.victor.springapi.domain.PagamentoComBoleto;
+import org.springframework.stereotype.Service;
+
 import java.util.Calendar;
 import java.util.Date;
-import org.springframework.stereotype.Service;
 
 @Service
 public class BoletoService

@@ -1,7 +1,6 @@
 package com.victor.springapi.DTO;
 
 import com.victor.springapi.services.validation.ClienteInsert;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
