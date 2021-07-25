@@ -1,6 +1,7 @@
 package com.victor.springapi.config;
 
 import com.victor.springapi.security.JWTAuthenticationFilter;
+import com.victor.springapi.security.JWTAuthorizationFilter;
 import com.victor.springapi.security.JWTUtil;
 import com.victor.springapi.services.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
 
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
