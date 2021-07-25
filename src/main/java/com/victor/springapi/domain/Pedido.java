@@ -1,6 +1,12 @@
 package com.victor.springapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -8,9 +14,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
-import javax.persistence.*;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Pedido implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -38,19 +47,6 @@ public class Pedido implements Serializable
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<ItemPedido> itens = new HashSet<>();
 
-	public Pedido()
-	{
-
-	}
-
-	public Pedido(Integer id, Date instante, Cliente cliente, Endereco enderecoDeEntrega)
-	{
-		this.id = id;
-		this.instante = instante;
-		this.cliente = cliente;
-		this.enderecoDeEntrega = enderecoDeEntrega;
-	}
-
 	public double getValorTotal()
 	{
 		double soma = 0.0;
@@ -62,65 +58,6 @@ public class Pedido implements Serializable
 		return soma;
 	}
 
-	public Integer getId()
-	{
-		return id;
-	}
-
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
-
-	public Date getInstante()
-	{
-		return instante;
-	}
-
-	public void setInstante(Date instante)
-	{
-		this.instante = instante;
-	}
-
-	public Pagamento getPagamento()
-	{
-		return pagamento;
-	}
-
-	public void setPagamento(Pagamento pagamento)
-	{
-		this.pagamento = pagamento;
-	}
-
-	public Cliente getCliente()
-	{
-		return cliente;
-	}
-
-	public void setCliente(Cliente cliente)
-	{
-		this.cliente = cliente;
-	}
-
-	public Endereco getEnderecoDeEntrega()
-	{
-		return enderecoDeEntrega;
-	}
-
-	public void setEnderecoDeEntrega(Endereco enderecoDeEntrega)
-	{
-		this.enderecoDeEntrega = enderecoDeEntrega;
-	}
-
-	public Set<ItemPedido> getItens()
-	{
-		return itens;
-	}
-
-	public void setItens(Set<ItemPedido> itens)
-	{
-		this.itens = itens;
-	}
 
 	@Override
 	public boolean equals(Object o)

@@ -5,15 +5,15 @@ import com.victor.springapi.domain.enums.EstadoPagamento;
 import com.victor.springapi.domain.enums.Perfil;
 import com.victor.springapi.domain.enums.TipoCliente;
 import com.victor.springapi.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Service;
 
 @Service
 public class DBService
@@ -59,39 +59,39 @@ public class DBService
 		Categoria cat6 = new Categoria(null, "Escola");
 		Categoria cat7 = new Categoria(null, "Limpeza");
 
-		Produto p1 = new Produto(null, "computador", 2000.0);
-		Produto p2 = new Produto(null, "impressora", 800.0);
-		Produto p3 = new Produto(null, "mouse", 80.0);
-		Produto p4 = new Produto(null, "mesa de escritorio", 2000.0);
-		Produto p5 = new Produto(null, "toalha", 800.0);
-		Produto p6 = new Produto(null, "colcha", 80.0);
-		Produto p7 = new Produto(null, "tv true color", 2000.0);
-		Produto p8 = new Produto(null, "roçadeira", 800.0);
-		Produto p9 = new Produto(null, "abajour", 80.0);
-		Produto p10 = new Produto(null, "Pendente", 2000.0);
-		Produto p11 = new Produto(null, "Shampoo", 800.0);
+		var p1 = Produto.builder().nome("computador").preco(2000.0).build();
+		var p2 = Produto.builder().nome("impressora").preco(800.0).build();
+		var p3 = Produto.builder().nome("mouse").preco(80.0).build();
+		var p4 = Produto.builder().nome("mesa de escritorio").preco(2000.0).build();
+		var p5 = Produto.builder().nome("toalha").preco(800.0).build();
+		var p6 = Produto.builder().nome("colcha").preco(80.0).build();
+		var p7 = Produto.builder().nome("tv true color").preco(2000.0).build();
+		var p8 = Produto.builder().nome("roçadeira").preco(800.0).build();
+		var p9 = Produto.builder().nome("abajour").preco(80.0).build();
+		var p10 = Produto.builder().nome("Pendente").preco(00.0).build();
+		var p11 = Produto.builder().nome("Shampoo").preco(8.0).build();
 
 
-		//substituir getProdutos().addAll(...) por setProdutos(...)
-		cat1.getProdutos().addAll(Arrays.asList(p1, p2, p3));
-		cat2.getProdutos().addAll(Arrays.asList(p2, p4));
-		cat3.getProdutos().addAll(Arrays.asList(p5, p6));
-		cat4.getProdutos().addAll(Arrays.asList(p1, p2, p3, p7));
-		cat5.getProdutos().addAll(Arrays.asList(p8));
-		cat6.getProdutos().addAll(Arrays.asList(p9, p10));
-		cat7.getProdutos().addAll(Arrays.asList(p11));
+		//substituir setProdutos(...) por setProdutos(...)
+		cat1.setProdutos(Arrays.asList(p1, p2, p3));
+		cat2.setProdutos(Arrays.asList(p2, p4));
+		cat3.setProdutos(Arrays.asList(p5, p6));
+		cat4.setProdutos(Arrays.asList(p1, p2, p3, p7));
+		cat5.setProdutos(Arrays.asList(p8));
+		cat6.setProdutos(Arrays.asList(p9, p10));
+		cat7.setProdutos(Arrays.asList(p11));
 
-		p1.getCategorias().addAll(Arrays.asList(cat1, cat4));
-		p2.getCategorias().addAll(Arrays.asList(cat1, cat2, cat4));
-		p3.getCategorias().addAll(Arrays.asList(cat1, cat4));
-		p4.getCategorias().addAll(Arrays.asList(cat2));
-		p5.getCategorias().addAll(Arrays.asList(cat3));
-		p6.getCategorias().addAll(Arrays.asList(cat3));
-		p7.getCategorias().addAll(Arrays.asList(cat4));
-		p8.getCategorias().addAll(Arrays.asList(cat5));
-		p9.getCategorias().addAll(Arrays.asList(cat6));
-		p10.getCategorias().addAll(Arrays.asList(cat6));
-		p11.getCategorias().addAll(Arrays.asList(cat7));
+		p1.setCategorias(Arrays.asList(cat1, cat4));
+		p2.setCategorias(Arrays.asList(cat1, cat2, cat4));
+		p3.setCategorias(Arrays.asList(cat1, cat4));
+		p4.setCategorias(Arrays.asList(cat2));
+		p5.setCategorias(Arrays.asList(cat3));
+		p6.setCategorias(Arrays.asList(cat3));
+		p7.setCategorias(Arrays.asList(cat4));
+		p8.setCategorias(Arrays.asList(cat5));
+		p9.setCategorias(Arrays.asList(cat6));
+		p10.setCategorias(Arrays.asList(cat6));
+		p11.setCategorias(Arrays.asList(cat7));
 
 		categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5 , p6, p7, p8, p9, p10, p11));
@@ -133,14 +133,39 @@ public class DBService
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
-		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2020 10:32"), cli1, e1);
-		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2020 08:22"), cli1, e2);
+		var ped1 = Pedido.builder()
+				.id(null)
+				.instante(sdf.parse("30/09/2020 10:32"))
+				.cliente(cli1)
+				.enderecoDeEntrega(e1)
+				.build();
+		
+		var ped2 = Pedido.builder()
+				.id(null)
+				.instante(sdf.parse("10/10/2020 08:22"))
+				.cliente(cli1)
+				.enderecoDeEntrega(e2)
+				.build();
+		
 
-		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		var pagto1 = PagamentoComCartao
+				.builder()
+				.id(null)
+				.estadoPagamento(EstadoPagamento.QUITADO.getCode())
+				.pedido(ped1)
+				.numeroDeParcelas(6)
+				.build();
 		ped1.setPagamento(pagto1);
 
-		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2,
-			sdf.parse("20/10/2020 00:00"), null);
+		var pagto2 = PagamentoComBoleto
+				.builder()
+				.id(null)
+				.estadoPagamento(EstadoPagamento.PENDENTE.getCode())
+				.pedido(ped2)
+				.dataVencimento(sdf.parse("20/10/2020 00:00"))
+				.dataPagamento(null)
+				.build();
+
 		ped2.setPagamento(pagto2);
 
 		cli1.setPedidos(Arrays.asList(ped1, ped2));

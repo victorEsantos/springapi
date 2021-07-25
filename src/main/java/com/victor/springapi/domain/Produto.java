@@ -1,14 +1,23 @@
 package com.victor.springapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.*;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
 public class Produto implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -30,17 +39,6 @@ public class Produto implements Serializable
 	private Set<ItemPedido> itens = new HashSet<>();
 
 
-	public Produto()
-	{
-	}
-
-	public Produto(Integer id, String nome, Double preco)
-	{
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.preco = preco;
-	}
 
 	@JsonIgnore
 	public List<Pedido> getPedidos()

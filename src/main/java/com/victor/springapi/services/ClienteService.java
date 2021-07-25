@@ -10,9 +10,6 @@ import com.victor.springapi.repository.ClienteRepository;
 import com.victor.springapi.repository.EnderecoRepository;
 import com.victor.springapi.services.exceptions.DataIntegrityException;
 import com.victor.springapi.services.exceptions.ObjectNotFoundException;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -20,6 +17,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService

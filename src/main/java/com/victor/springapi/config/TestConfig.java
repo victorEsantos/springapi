@@ -3,13 +3,12 @@ package com.victor.springapi.config;
 import com.victor.springapi.services.DBService;
 import com.victor.springapi.services.EmailService;
 import com.victor.springapi.services.MockEmailService;
-
-import java.text.ParseException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+
+import java.text.ParseException;
 
 @Configuration
 @Profile("test")

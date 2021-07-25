@@ -3,12 +3,21 @@ package com.victor.springapi.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.victor.springapi.domain.enums.EstadoPagamento;
-import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@SuperBuilder
 public abstract class Pagamento implements Serializable
 {
 	private static final long serialVersionUID = 1L;
@@ -24,27 +33,6 @@ public abstract class Pagamento implements Serializable
 	@MapsId
 	private Pedido pedido;
 
-	public Pagamento()
-	{
-
-	}
-
-	public Pagamento(Integer id, EstadoPagamento estadoPagamento, Pedido pedido)
-	{
-		this.id = id;
-		this.estadoPagamento = (estadoPagamento == null) ? null : estadoPagamento.getCode();
-		this.pedido = pedido;
-	}
-
-	public Integer getId()
-	{
-		return id;
-	}
-
-	public void setId(Integer id)
-	{
-		this.id = id;
-	}
 
 	public EstadoPagamento getEstadoPagamento()
 	{
@@ -54,16 +42,6 @@ public abstract class Pagamento implements Serializable
 	public void setEstadoPagamento(EstadoPagamento estadoPagamento)
 	{
 		this.estadoPagamento = estadoPagamento.getCode();
-	}
-
-	public Pedido getPedido()
-	{
-		return pedido;
-	}
-
-	public void setPedido(Pedido pedido)
-	{
-		this.pedido = pedido;
 	}
 
 	@Override

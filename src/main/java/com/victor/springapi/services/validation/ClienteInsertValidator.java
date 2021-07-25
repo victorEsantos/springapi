@@ -1,17 +1,17 @@
 package com.victor.springapi.services.validation;
 
 import com.victor.springapi.DTO.ClienteNewDTO;
+import com.victor.springapi.controller.exception.FieldErrorMessage;
 import com.victor.springapi.domain.Cliente;
 import com.victor.springapi.domain.enums.TipoCliente;
 import com.victor.springapi.repository.ClienteRepository;
-import com.victor.springapi.controller.exception.FieldErrorMessage;
 import com.victor.springapi.services.validation.utils.BR;
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO>
 {

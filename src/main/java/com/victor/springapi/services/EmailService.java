@@ -1,8 +1,9 @@
 package com.victor.springapi.services;
 
 import com.victor.springapi.domain.Pedido;
-import javax.mail.internet.MimeMessage;
 import org.springframework.mail.SimpleMailMessage;
+
+import javax.mail.internet.MimeMessage;
 
 public interface EmailService
 {
