@@ -1,9 +1,9 @@
 volumes:
-  - curso-hib-pg-data: {}
-  - rabbitmq-data: {}
+  curso-hib-pg-data: { }
+  rabbitmq-data: { }
 
 services:
-  rabbitmq:
+  aplicacao-rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq
     restart: always
@@ -11,9 +11,10 @@ services:
       - 5672:5672
       - 15672:15672
     volumes:
-      - rabbitmq-data:var/lib/rabbitmq/
-      - RABBITMQ_DEFAULT_USER: admin
-      - RABBITMQ_DEFAULT_PASS: admin
+      - rabbitmq-data:/var/lib/rabbitmq/
+#    environment:
+#      - RABBITMQ_USERNAME=admin
+#      - RABBITMQ_PASSWORD=admin
 
   database-postgres:
     image: sameersbn/postgresql:10-1
